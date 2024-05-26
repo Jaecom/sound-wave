@@ -12,7 +12,10 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
 	const colorScheme = useColorScheme();
 	const [loaded] = useFonts({
-		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+		NanumSquareRegular: require("../assets/fonts/NanumSquareR.ttf"),
+		NanumSquareBold: require("../assets/fonts/NanumSquareB.ttf"),
+		NanumSquareExtraBold: require("../assets/fonts/NanumSquareEB.ttf"),
+		NanumSquareLight: require("../assets/fonts/NanumSquareL.ttf"),
 	});
 
 	useEffect(() => {

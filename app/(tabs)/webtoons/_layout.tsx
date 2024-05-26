@@ -9,6 +9,7 @@ const _layout = () => {
 				name="home"
 				options={{
 					title: "Webtoons",
+					headerShown: false,
 				}}
 			/>
 			<Stack.Screen

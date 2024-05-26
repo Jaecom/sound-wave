@@ -3,15 +3,17 @@ import { Link, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Stack } from "expo-router";
+import { webtoonList } from "@/components/HomePage/webtoon_list";
 
 const episodes = [{}, {}, {}, {}, {}, {}, {}, {}];
 
 const index = () => {
 	const { webtoonId } = useLocalSearchParams();
+	const webtoon = webtoonList.find((item) => item.id === +(webtoonId ?? 0));
 
 	return (
 		<>
-			<Stack.Screen options={{ title: `Webtoon ${+(webtoonId ?? 0) + 1}` }} />
+			<Stack.Screen options={{ title: webtoon?.title }} />
 			<SafeAreaView>
 				<View>
 					{episodes.map((item, index) => {
