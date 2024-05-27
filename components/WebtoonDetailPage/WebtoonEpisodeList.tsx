@@ -1,13 +1,12 @@
 import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { Webtoon, webtoonList } from "../../data/webtoon_list";
-import { Image } from "react-native";
 import { StyleSheet } from "react-native";
-import WebtoonHomeCard from "./WebtoonHomeCard";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { router } from "expo-router";
+import WebtoonDetailTop from "./WebtoonDetailTop";
 
-const WebtoonHomeList = () => {
+const WebtoonEpisodeList = ({ data }: { data: any }) => {
 	const handlePress = (item: Webtoon) => {
 		if (item.id == 3) {
 			router.push(`/webtoons/${item.id}`);
@@ -16,23 +15,24 @@ const WebtoonHomeList = () => {
 
 	return (
 		<FlatList
-			data={webtoonList}
+			ListHeaderComponent={<WebtoonDetailTop />}
+			data={data}
 			renderItem={({ item }) => (
 				<View style={styles.card}>
 					<TouchableOpacity onPress={() => handlePress(item)}>
-						<WebtoonHomeCard item={item} />
+						<View>
+							<Text>{item.title}</Text>
+						</View>
 					</TouchableOpacity>
 				</View>
 			)}
 			keyExtractor={(item, index) => index.toString()}
 			contentContainerStyle={styles.container}
-			numColumns={3}
-			columnWrapperStyle={{ justifyContent: "space-between" }}
 		/>
 	);
 };
 
-export default WebtoonHomeList;
+export default WebtoonEpisodeList;
 
 const styles = StyleSheet.create({
 	container: {

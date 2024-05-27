@@ -16,12 +16,14 @@ const _layout = () => {
 				name="[webtoonId]/[episode]/index"
 				options={{
 					title: "Episodes",
+					headerShown: false,
 				}}
 			/>
 			<Stack.Screen
 				name="[webtoonId]/index"
 				options={{
 					title: "Episodes",
+					headerShown: false,
 				}}
 			/>
 		</Stack>

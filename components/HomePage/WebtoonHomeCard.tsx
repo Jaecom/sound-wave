@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { StyleSheet, Image } from "react-native";
-import { Webtoon } from "./webtoon_list";
+import { Webtoon } from "../../data/webtoon_list";
 
 const WebtoonHomeCard = ({ item }: { item: Webtoon }) => {
 	return (
