@@ -5,7 +5,6 @@ export const useMusicPlayer = (audio: any) => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isReady, setIsReady] = useState(false);
 	const [speed, setSpeed] = useState(1.0);
-	console.log(speed);
 
 	useEffect(() => {
 		const setup = async () => {
@@ -35,6 +34,7 @@ export const useMusicPlayer = (audio: any) => {
 
 			reset();
 			setIsReady(false);
+			changeSpeed(1.0);
 		};
 	}, []);
 

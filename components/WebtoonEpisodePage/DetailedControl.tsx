@@ -39,6 +39,7 @@ const DetailedControl = ({ onWindPrevious, onPlay, onWindForward, isPlaying, set
 	};
 	return (
 		<View style={detailedControl.container}>
+			<View style={detailedControl.firstRow}></View>
 			<View style={detailedControl.secondRow}>
 				<View style={detailedControl.audioControlGroup}>
 					<TouchableOpacity onPress={onWindPrevious} style={detailedControl.group}>
@@ -74,6 +75,7 @@ const detailedControl = StyleSheet.create({
 		backgroundColor: "#2D3648",
 		padding: 8,
 	},
+	firstRow: {},
 	secondRow: {
 		display: "flex",
 		flexDirection: "row",
