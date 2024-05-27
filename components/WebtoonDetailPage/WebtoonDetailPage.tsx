@@ -1,26 +1,46 @@
-import { View, Text, FlatList } from "react-native";
-import React from "react";
-import { Webtoon, webtoonList } from "../../data/webtoon_list";
+import { View, FlatList } from "react-native";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { router } from "expo-router";
 import WebtoonDetailTop from "./WebtoonDetailTop";
-import { WebtoonEpisode, towerOfGodData } from "@/data/tower_of_god";
+import { WebtoonDetail, WebtoonEpisode, towerOfGodData } from "@/data/tower_of_god";
 import EpisodeItem from "./EpisodeItem";
 
-const WebtoonDetailPage = () => {
-	const { title, author, day, tags, summary, age, episodes, id } = towerOfGodData;
+type Props = {
+	webtoonData: WebtoonDetail;
+};
+const WebtoonDetailPage = ({ webtoonData }: Props) => {
+	const { episodes, id } = webtoonData;
+	const [sortBy, setSortBy] = useState("날짜순");
+	const [sortedEpisodes, setSortedEpisodes] = useState(episodes);
 
 	const onEpisodePressHandler = (episode: WebtoonEpisode) => {
-		if (![1, 2].includes(episode.id)) return;
-
+		if (![0].includes(episode.id)) return;
 		router.push(`/webtoons/${id}/${episode.id}`);
 	};
+
+	const onSortChangeHandler = (sortBy: string) => {
+		if (sortBy === "날짜순") {
+			setSortedEpisodes(episodes.slice().sort((a, b) => a.id - b.id));
+			setSortBy("날짜순");
+		} else if (sortBy === "최신순") {
+			setSortedEpisodes(episodes.slice().sort((a, b) => b.id - a.id));
+			setSortBy("최신순");
+		}
+	};
+
 	return (
 		<View>
 			<FlatList
-				ListHeaderComponent={<WebtoonDetailTop />}
-				data={episodes}
+				ListHeaderComponent={
+					<WebtoonDetailTop
+						webtoonId={id}
+						webtoonData={webtoonData}
+						sortBy={sortBy}
+						onSortChange={onSortChangeHandler}
+					/>
+				}
+				data={sortedEpisodes}
 				renderItem={({ item }) => <EpisodeItem key={item.id} episode={item} onEpisodePress={onEpisodePressHandler} />}
 				keyExtractor={(item, index) => index.toString()}
 				contentContainerStyle={styles.container}

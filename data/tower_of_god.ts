@@ -4,6 +4,7 @@ export type WebtoonEpisode = {
 	date: string;
 	thumbnail: any; // You can use the specific type for thumbnails if available
 	id: number;
+	audio?: any;
 };
 
 export type WebtoonDetail = {
@@ -34,6 +35,7 @@ export const towerOfGodData: WebtoonDetail = {
 			rating: "9.32",
 			date: "10.06.30",
 			thumbnail: require("@/assets/webtoons/tower_of_god_thumbnail/0.jpg"),
+			audio: require("@/assets/tracks/tower_of_god_0.wav"),
 		},
 		{
 			id: 1,

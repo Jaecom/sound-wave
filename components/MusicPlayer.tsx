@@ -5,13 +5,17 @@ import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const track1 = {
-	url: require("../assets/tracks/tower_of_god_1.mp3"),
+	url: require("../assets/tracks/tower_of_god_0.wav"),
 	title: "Track 1",
 	artist: "Artist",
 	duration: 200,
 };
 
-const MusicPlayer = () => {
+type Props = {
+	audio: any;
+};
+
+const MusicPlayer = ({ audio }: Props) => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isReady, setIsReady] = useState(false);
 
@@ -23,7 +27,14 @@ const MusicPlayer = () => {
 				await TrackPlayer.setupPlayer();
 			} catch (e) {}
 
-			await TrackPlayer.add([track1]);
+			await TrackPlayer.add([
+				{
+					url: audio,
+					title: "Track 1",
+					artist: "Artist",
+					duration: 200,
+				},
+			]);
 			setIsReady(true);
 		};
 
