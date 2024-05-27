@@ -10,6 +10,8 @@ export const windBreakerData: WebtoonDetail = {
 	age: "12세 이용가",
 	tags: ["스포츠", "주간남성랭킹 TOP 20", "학원", "스포츠성장", "관련작품더보기"],
 	cover: require("@/assets/webtoons/windbreaker_thumbnail/cover.png"),
+	comments: 21,
+	likes: 1561,
 	episodes: [
 		{
 			id: 0,

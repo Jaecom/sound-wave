@@ -19,10 +19,15 @@ type Props = {
 };
 
 const WebtoonEpisodePage = ({ webtoon, episodeId }: Props) => {
+	const { comments, likes } = webtoon;
 	const audio = webtoon.episodes[episodeId].audio;
 	const { onBackward, onForward, togglePlay, isPlaying, speed, changeSpeed } = useMusicPlayer(audio);
+	const [initialStart, setInitialStart] = useState(false);
 
 	const onPlayHandler = () => {
+		if (initialStart === false) {
+			setInitialStart(true);
+		}
 		togglePlay();
 	};
 
@@ -61,17 +66,19 @@ const WebtoonEpisodePage = ({ webtoon, episodeId }: Props) => {
 			/>
 			<View style={contentStyles.content}>
 				<View style={{ backgroundColor: "black" }}></View>
-				<DetailedControl
-					onPlay={onPlayHandler}
-					onWindForward={onWindForwardHandler}
-					onWindPrevious={onWindPreviousHandler}
-					isPlaying={isPlaying}
-					setSpeed={changeSpeed}
-					speed={speed}
-				/>
+				{initialStart && (
+					<DetailedControl
+						onPlay={onPlayHandler}
+						onWindForward={onWindForwardHandler}
+						onWindPrevious={onWindPreviousHandler}
+						isPlaying={isPlaying}
+						setSpeed={changeSpeed}
+						speed={speed}
+					/>
+				)}
 			</View>
 			<View style={basicControl.container}>
-				<BasicControl />
+				<BasicControl likes={likes} comments={comments} />
 			</View>
 		</>
 	);

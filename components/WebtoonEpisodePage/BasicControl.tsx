@@ -5,17 +5,22 @@ import HeartLogo from "@/assets/icons/heart.svg";
 import NextEpisodeLogo from "@/assets/icons/next_episode.svg";
 import PreviousEpisodeLogo from "@/assets/icons/previous_episode.svg";
 
-const BasicControl = () => {
+type Props = {
+	comments: number;
+	likes: number;
+};
+
+const BasicControl = ({ comments, likes }: Props) => {
 	return (
 		<View style={basicControl.firstControl}>
 			<View style={basicControl.group}>
 				<View style={basicControl.textIconGroup}>
 					<HeartLogo />
-					<Text style={basicControl.controlText}>000</Text>
+					<Text style={basicControl.controlText}>{likes}</Text>
 				</View>
 				<View style={basicControl.textIconGroup}>
 					<CommentLogo />
-					<Text style={basicControl.controlText}>000</Text>
+					<Text style={basicControl.controlText}>{comments}</Text>
 				</View>
 			</View>
 			<View style={basicControl.group}>

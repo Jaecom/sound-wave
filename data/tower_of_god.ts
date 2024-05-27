@@ -17,6 +17,8 @@ export type WebtoonDetail = {
 	tags: string[];
 	cover: any; // You can use the specific type for thumbnails if available
 	episodes: WebtoonEpisode[];
+	comments: number;
+	likes: number;
 };
 
 export const towerOfGodData: WebtoonDetail = {
@@ -28,6 +30,8 @@ export const towerOfGodData: WebtoonDetail = {
 	age: "12세 이용가",
 	tags: ["판타지", "판타지 무협랭킹 TOP 20", "세계관", "이능력배틀물", "소년왕도물", "먼치킨", "관련작품더보기"],
 	cover: require("@/assets/webtoons/tower_of_god_thumbnail/cover.png"),
+	comments: 32,
+	likes: 123,
 	episodes: [
 		{
 			id: 0,

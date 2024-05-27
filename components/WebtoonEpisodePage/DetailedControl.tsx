@@ -3,6 +3,7 @@ import React from "react";
 import PlayLogo from "@/assets/icons/play.svg";
 import WindForwardLogo from "@/assets/icons/wind_forward.svg";
 import WindBackwardLogo from "@/assets/icons/wind_backward.svg";
+import PauseLogo from "@/assets/icons/pause.svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import PlayFilledLogo from "@/assets/icons/play_filled.svg";
 import { ActionSheetIOS } from "react-native";
@@ -47,7 +48,7 @@ const DetailedControl = ({ onWindPrevious, onPlay, onWindForward, isPlaying, set
 						<Text style={detailedControl.groupText}>후진</Text>
 					</TouchableOpacity>
 					<TouchableOpacity onPress={onPlay} style={detailedControl.group}>
-						{isPlaying ? <PlayFilledLogo /> : <PlayLogo />}
+						{isPlaying ? <PauseLogo /> : <PlayLogo />}
 						<Text style={detailedControl.groupText}>{isPlaying ? "정지" : "재생"}</Text>
 					</TouchableOpacity>
 					<TouchableOpacity onPress={onWindForward} style={detailedControl.group}>
