@@ -13,6 +13,7 @@ const track1 = {
 
 type Props = {
 	audio: any;
+	speed: number;
 };
 
 const MusicPlayer = ({ audio }: Props) => {

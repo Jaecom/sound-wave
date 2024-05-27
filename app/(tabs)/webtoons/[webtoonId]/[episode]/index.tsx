@@ -5,21 +5,18 @@ import { Stack } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
 import { towerOfGodData } from "@/data/tower_of_god";
 import { windBreakerData } from "@/data/windbreaker";
+import WebtoonEpisodePage from "@/components/WebtoonEpisodePage/WebtoonEpisodePage";
+import TestPage from "@/components/WebtoonEpisodePage";
 
 const detail = () => {
-	const { webtoonId, episode } = useLocalSearchParams();
+	const { webtoonId: webtoonIdString, episode: episodeString } = useLocalSearchParams();
 
-	const webtoon = +(webtoonId ?? 0) === 3 ? towerOfGodData : windBreakerData;
-	const audio = webtoon.episodes[0].audio;
+	const webtoonId = +(webtoonIdString ?? 0);
+	const episodeId = +(episodeString ?? 0);
 
-	return (
-		<>
-			<Stack.Screen options={{ title: `Episode ${+(episode ?? 0) + 1}` }} />
-			<View>
-				<MusicPlayer audio={audio} />
-			</View>
-		</>
-	);
+	const webtoon = webtoonId === 3 ? towerOfGodData : windBreakerData;
+
+	return <WebtoonEpisodePage webtoon={webtoon} webtoonId={webtoonId} episodeId={episodeId} />;
 };
 
 export default detail;
