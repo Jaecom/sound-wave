@@ -8,8 +8,6 @@ import WebtoonDetailPage from "@/components/WebtoonDetailPage/WebtoonDetailPage"
 import { StatusBar } from "react-native";
 import Contants from "expo-constants";
 
-const episodes = [{}, {}, {}, {}, {}, {}, {}, {}];
-
 const index = () => {
 	const statusBarHeight = Contants.statusBarHeight;
 	const { webtoonId } = useLocalSearchParams();

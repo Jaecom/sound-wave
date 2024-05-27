@@ -18,7 +18,11 @@ const MusicPlayer = () => {
 	useEffect(() => {
 		const setup = async () => {
 			TrackPlayer.registerPlaybackService(() => require("./service"));
-			await TrackPlayer.setupPlayer();
+
+			try {
+				await TrackPlayer.setupPlayer();
+			} catch (e) {}
+
 			await TrackPlayer.add([track1]);
 			setIsReady(true);
 		};

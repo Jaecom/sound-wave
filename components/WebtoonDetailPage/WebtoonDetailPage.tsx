@@ -12,6 +12,8 @@ const WebtoonDetailPage = () => {
 	const { title, author, day, tags, summary, age, episodes, id } = towerOfGodData;
 
 	const onEpisodePressHandler = (episode: WebtoonEpisode) => {
+		if (![1, 2].includes(episode.id)) return;
+
 		router.push(`/webtoons/${id}/${episode.id}`);
 	};
 	return (

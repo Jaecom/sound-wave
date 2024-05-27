@@ -9,7 +9,7 @@ import { router } from "expo-router";
 
 const WebtoonHomeList = () => {
 	const handlePress = (item: Webtoon) => {
-		if (item.id == 3) {
+		if ([3, 5].includes(item.id)) {
 			router.push(`/webtoons/${item.id}`);
 		}
 	};
