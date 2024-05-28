@@ -7,6 +7,10 @@ import PauseLogo from "@/assets/icons/pause.svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import PlayFilledLogo from "@/assets/icons/play_filled.svg";
 import { ActionSheetIOS } from "react-native";
+import { useProgress } from "react-native-track-player";
+import Slider from "@react-native-community/slider";
+import { formatTime } from "@/utils/format-time";
+const thumbImage = require("@/assets/icons/track_thumb_icon.svg");
 
 type Props = {
 	onWindPrevious: () => void;
@@ -15,9 +19,22 @@ type Props = {
 	isPlaying: boolean;
 	setSpeed: (speed: number) => void;
 	speed: number;
+	seekTo: (position: number) => void;
 };
 
-const DetailedControl = ({ onWindPrevious, onPlay, onWindForward, isPlaying, setSpeed, speed }: Props) => {
+const DetailedControl = ({ onWindPrevious, onPlay, onWindForward, isPlaying, setSpeed, speed, seekTo }: Props) => {
+	const progress = useProgress();
+
+	const onValueChange = (value: number) => {
+		let timeout;
+
+		clearTimeout(timeout);
+
+		timeout = setTimeout(() => {
+			seekTo(value);
+		}, 200);
+	};
+
 	const onSpeedChangeHandler = () => {
 		ActionSheetIOS.showActionSheetWithOptions(
 			{
@@ -40,7 +57,23 @@ const DetailedControl = ({ onWindPrevious, onPlay, onWindForward, isPlaying, set
 	};
 	return (
 		<View style={detailedControl.container}>
-			<View style={detailedControl.firstRow}></View>
+			<View style={detailedControl.firstRow}>
+				<Slider
+					value={progress.position}
+					minimumValue={0}
+					maximumValue={progress.buffered}
+					minimumTrackTintColor="#00DC64"
+					thumbTintColor="#00DC64"
+					maximumTrackTintColor="#D9D9D9"
+					thumbImage={thumbImage}
+					onValueChange={onValueChange}
+					style={{ marginHorizontal: 10 }}
+				/>
+				<View style={detailedControl.progressContainer}>
+					<Text style={detailedControl.time}>{formatTime(progress.position)}</Text>
+					<Text style={detailedControl.time}>{formatTime(progress.buffered)}</Text>
+				</View>
+			</View>
 			<View style={detailedControl.secondRow}>
 				<View style={detailedControl.audioControlGroup}>
 					<TouchableOpacity onPress={onWindPrevious} style={detailedControl.group}>
@@ -76,7 +109,9 @@ const detailedControl = StyleSheet.create({
 		backgroundColor: "#2D3648",
 		padding: 8,
 	},
-	firstRow: {},
+	firstRow: {
+		paddingBottom: 10,
+	},
 	secondRow: {
 		display: "flex",
 		flexDirection: "row",
@@ -101,5 +136,15 @@ const detailedControl = StyleSheet.create({
 		fontWeight: "bold",
 		color: "white",
 		fontSize: 18,
+	},
+	progressContainer: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+	},
+	time: {
+		color: "white",
+		fontWeight: "bold",
+		fontSize: 12,
 	},
 });

@@ -70,5 +70,9 @@ export const useMusicPlayer = (audio: any) => {
 		setSpeed(speed);
 	};
 
-	return { togglePlay, isPlaying, onForward, onBackward, changeSpeed, speed };
+	const seekTo = (position: number) => {
+		TrackPlayer.seekTo(position);
+	};
+
+	return { togglePlay, isPlaying, onForward, onBackward, changeSpeed, speed, seekTo };
 };
