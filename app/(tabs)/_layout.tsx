@@ -1,4 +1,4 @@
-import { Tabs } from "expo-router";
+import { Link, Tabs } from "expo-router";
 import React from "react";
 import { useSegments } from "expo-router";
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -8,6 +8,7 @@ import SmileIcon from "@/assets/icons/tabs/tab_smile_icon_line.svg";
 import RecommendedIcon from "@/assets/icons/tabs/tab_complete_icon_line.svg";
 import BlockIcon from "@/assets/icons/tabs/tab_block_icon_line.svg";
 import CalendarFillIcon from "@/assets/icons/tabs/tab_calendar_icon_fill.svg";
+import { StyleSheet, View } from "react-native";
 
 export default function TabLayout() {
 	const colorScheme = useColorScheme();
@@ -25,10 +26,9 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="webtoons"
 				options={{
-					title: "웹툰",
-					headerShown: false,
 					tabBarStyle: { display: pagesToHideTabBar.includes(page) ? "none" : "flex" },
 					tabBarIcon: ({ focused }) => (focused ? <CalendarFillIcon /> : <CalendarIcon />),
+					headerShown: false,
 				}}
 			/>
 			<Tabs.Screen
@@ -68,3 +68,9 @@ export default function TabLayout() {
 		</Tabs>
 	);
 }
+
+const styles = StyleSheet.create({
+	topRightContainer: {
+		marginRight: 20,
+	},
+});

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import WebtoonHomeList from "./WebtoonHomeList";
 import Contants from "expo-constants";
+import SearchIcon from "@/assets/icons/search-sm.svg";
+import { Link } from "expo-router";
 
 const HomePage = () => {
 	const statusBarHeight = Contants.statusBarHeight;
@@ -12,7 +14,12 @@ const HomePage = () => {
 		<>
 			<StatusBar barStyle="dark-content" />
 			<View style={[styles.top, { height: statusBarHeight }]} />
-			<SafeAreaView style={styles.background}>
+			<SafeAreaView style={styles.content}>
+				<View style={styles.topControl}>
+					<Link style={styles.search} href="/search">
+						<SearchIcon />
+					</Link>
+				</View>
 				<Image style={styles.banner} source={require("@assets/webtoons/home_thumbnails/banner.jpeg")} />
 				<View style={styles.tabContainer}>
 					{["신작", "매일+", "월", "화", "수", "목", "금", "토", "일", "완결"].map((tab) => (
@@ -34,8 +41,7 @@ const HomePage = () => {
 export default HomePage;
 
 const styles = StyleSheet.create({
-	background: { backgroundColor: "#ffffff" },
-
+	content: { backgroundColor: "#ffffff", position: "relative" },
 	top: {
 		backgroundColor: "#B025CA",
 		height: "100%",
@@ -74,6 +80,17 @@ const styles = StyleSheet.create({
 		height: 169,
 		objectFit: "contain",
 	},
-	webtoonContainer: {},
-	webtoonLink: {},
+	topControl: {
+		position: "absolute",
+		top: 0,
+		left: 0,
+		right: 0,
+		zIndex: 1,
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-end",
+	},
+	search: {
+		padding: 8,
+	},
 });

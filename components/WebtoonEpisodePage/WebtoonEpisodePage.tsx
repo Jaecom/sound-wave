@@ -27,8 +27,10 @@ const WebtoonEpisodePage = ({ webtoon, episodeId }: Props) => {
 	const onPlayHandler = () => {
 		if (initialStart === false) {
 			setInitialStart(true);
+			togglePlay();
+		} else {
+			setInitialStart(false);
 		}
-		togglePlay();
 	};
 
 	const onWindPreviousHandler = () => {
@@ -47,7 +49,7 @@ const WebtoonEpisodePage = ({ webtoon, episodeId }: Props) => {
 					headerRight: () => (
 						<View style={headerStyles.container}>
 							<TouchableOpacity onPress={onPlayHandler}>
-								{isPlaying ? <PlayFilledLogo /> : <PlayLogo />}
+								{initialStart ? <PlayFilledLogo /> : <PlayLogo />}
 							</TouchableOpacity>
 							<TouchableOpacity>
 								<MoreLogo />
@@ -66,16 +68,17 @@ const WebtoonEpisodePage = ({ webtoon, episodeId }: Props) => {
 			/>
 			<View style={contentStyles.content}>
 				<View style={{ backgroundColor: "black" }}></View>
-
-				<DetailedControl
-					onPlay={onPlayHandler}
-					onWindForward={onWindForwardHandler}
-					onWindPrevious={onWindPreviousHandler}
-					isPlaying={isPlaying}
-					setSpeed={changeSpeed}
-					speed={speed}
-					seekTo={seekTo}
-				/>
+				{initialStart && (
+					<DetailedControl
+						onPlay={togglePlay}
+						onWindForward={onWindForwardHandler}
+						onWindPrevious={onWindPreviousHandler}
+						isPlaying={isPlaying}
+						setSpeed={changeSpeed}
+						speed={speed}
+						seekTo={seekTo}
+					/>
+				)}
 			</View>
 			<View style={basicControl.container}>
 				<BasicControl likes={likes} comments={comments} />
