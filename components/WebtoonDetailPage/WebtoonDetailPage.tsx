@@ -16,7 +16,8 @@ const WebtoonDetailPage = ({ webtoonData }: Props) => {
 	const [sortedEpisodes, setSortedEpisodes] = useState(episodes);
 
 	const onEpisodePress = (episode: WebtoonEpisode) => {
-		if (![0].includes(episode.id)) return;
+		if (!episode.audio) return;
+
 		router.push(`/webtoons/${id}/${episode.id}`);
 	};
 

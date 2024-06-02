@@ -23,7 +23,10 @@ const _layout = () => {
 				name="[webtoonId]/index"
 				options={{
 					title: "Episodes",
-					headerShown: false,
+					headerShown: true,
+					headerTransparent: true,
+					headerTintColor: "white",
+					headerBackTitleVisible: false,
 				}}
 			/>
 		</Stack>

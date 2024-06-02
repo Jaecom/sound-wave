@@ -43,11 +43,11 @@ export const towerOfGodData: WebtoonDetail = {
 		},
 		{
 			id: 1,
-
 			title: "1화",
 			rating: "9.56",
 			date: "10.07.07",
 			thumbnail: require("@/assets/webtoons/tower_of_god_thumbnail/1.jpg"),
+			audio: require("@/assets/tracks/tower_of_god_1.wav"),
 		},
 		{
 			id: 2,
