@@ -4,10 +4,10 @@ export const windBreakerData: WebtoonDetail = {
 	id: 4,
 	title: "윈드브레이커",
 	author: "조용석",
-	day: "월요웹툰",
+	day: "월",
 	summary:
 		"혼자서 자전거를 즐겨타던 모범생 조자현. 원치 않게 자전거 크루의 일에 자꾸 휘말리게 되는데... 자유를 꿈꾸는 청춘들의 스트릿라이딩 드라마!",
-	age: "12세 이용가",
+	age: "12",
 	tags: ["스포츠", "주간남성랭킹 TOP 20", "학원", "스포츠성장", "관련작품더보기"],
 	cover: require("@/assets/webtoons/windbreaker_thumbnail/cover.png"),
 	comments: 21,

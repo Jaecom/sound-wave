@@ -7,27 +7,24 @@ import { router } from "expo-router";
 
 type Props = {
 	episode: WebtoonEpisode;
-	onEpisodePress: (episode: WebtoonEpisode) => void;
 };
 
-const EpisodeItem = ({ episode, onEpisodePress }: Props) => {
+const EpisodeItem = ({ episode }: Props) => {
 	const { title, thumbnail, rating, date } = episode;
 
 	return (
-		<TouchableOpacity onPress={() => onEpisodePress(episode)}>
+		<View style={styles.card}>
 			<View style={styles.card}>
-				<View style={styles.card}>
-					<Image style={styles.thumbnail} source={thumbnail} />
-					<View>
-						<Text>{title}</Text>
-						<View style={styles.subInfoContainer}>
-							<Text style={styles.subInfo}>{rating}</Text>
-							<Text style={styles.date}>{date}</Text>
-						</View>
+				<Image style={styles.thumbnail} source={thumbnail} />
+				<View>
+					<Text>{title}</Text>
+					<View style={styles.subInfoContainer}>
+						<Text style={styles.subInfo}>{rating}</Text>
+						<Text style={styles.date}>{date}</Text>
 					</View>
 				</View>
 			</View>
-		</TouchableOpacity>
+		</View>
 	);
 };
 

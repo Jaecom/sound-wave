@@ -8,7 +8,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ActionSheetIOS } from "react-native";
 import { useProgress } from "react-native-track-player";
 import Slider from "@react-native-community/slider";
-import { formatTime } from "@/utils/format-time";
+import { extractSecondsAndMinutes, formatTime } from "@/utils/format-time";
 const thumbImage = require("@/assets/icons/track_thumb_icon.svg");
 
 type Props = {
@@ -23,6 +23,8 @@ type Props = {
 
 const DetailedControl = ({ onWindPrevious, onPlay, onWindForward, isPlaying, setSpeed, speed, seekTo }: Props) => {
 	const progress = useProgress();
+	const { minutes, seconds } = extractSecondsAndMinutes(progress.position);
+	const { minutes: bufferedMinutes, seconds: bufferedSeconds } = extractSecondsAndMinutes(progress.buffered);
 
 	const onValueChange = (value: number) => {
 		let timeout;
@@ -37,8 +39,9 @@ const DetailedControl = ({ onWindPrevious, onPlay, onWindForward, isPlaying, set
 	const onSpeedChangeHandler = () => {
 		ActionSheetIOS.showActionSheetWithOptions(
 			{
-				options: ["1.0X", "1.5X", "2.0X", "취소"],
+				options: ["1.0배", "1.5배", "2.0배", "취소"],
 				cancelButtonIndex: 3,
+				title: "속도 조절",
 			},
 			(buttonIndex) => {
 				switch (buttonIndex) {
@@ -67,28 +70,40 @@ const DetailedControl = ({ onWindPrevious, onPlay, onWindForward, isPlaying, set
 					thumbImage={thumbImage}
 					onValueChange={onValueChange}
 					style={{ marginHorizontal: 10 }}
+					accessibilityLabel={`재생바 ${bufferedMinutes}분 ${bufferedSeconds}초 중 ${minutes}분 ${seconds}초 ${
+						isPlaying ? "재생중" : "일시정지"
+					}`}
 				/>
 				<View style={detailedControl.progressContainer}>
-					<Text style={detailedControl.time}>{formatTime(progress.position)}</Text>
-					<Text style={detailedControl.time}>{formatTime(progress.buffered)}</Text>
+					<Text style={detailedControl.time} accessibilityLabel={`현재 시간 ${minutes}분 ${seconds}초`}>
+						{formatTime(progress.position)}
+					</Text>
+					<Text style={detailedControl.time} accessibilityLabel={`전체 시간 ${minutes}분 ${seconds}초`}>
+						{formatTime(progress.buffered)}
+					</Text>
 				</View>
 			</View>
 			<View style={detailedControl.secondRow}>
 				<View style={detailedControl.audioControlGroup}>
-					<TouchableOpacity onPress={onWindPrevious} style={detailedControl.group}>
+					<TouchableOpacity onPress={onWindPrevious} style={detailedControl.group} accessibilityRole="button">
 						<WindBackwardLogo />
 						<Text style={detailedControl.groupText}>후진</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={onPlay} style={detailedControl.group}>
+					<TouchableOpacity onPress={onPlay} style={detailedControl.group} accessibilityRole="button">
 						{isPlaying ? <PauseLogo /> : <PlayLogo />}
 						<Text style={detailedControl.groupText}>{isPlaying ? "정지" : "재생"}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={onWindForward} style={detailedControl.group}>
+					<TouchableOpacity onPress={onWindForward} style={detailedControl.group} accessibilityRole="button">
 						<WindForwardLogo />
 						<Text style={detailedControl.groupText}>전진</Text>
 					</TouchableOpacity>
 				</View>
-				<TouchableOpacity style={detailedControl.group} onPress={onSpeedChangeHandler}>
+				<TouchableOpacity
+					style={detailedControl.group}
+					onPress={onSpeedChangeHandler}
+					accessibilityRole="button"
+					accessibilityLabel={`현재 속도 ${speed}배 속조조절`}
+				>
 					<Text style={detailedControl.speed}>{speed}X</Text>
 					<Text style={detailedControl.groupText}>속도조절</Text>
 				</TouchableOpacity>

@@ -5,3 +5,9 @@ export function formatTime(seconds: number) {
 	const formattedSeconds = String(remainingSeconds).padStart(2, "0");
 	return `${formattedMinutes}:${formattedSeconds}`;
 }
+
+export function extractSecondsAndMinutes(initialSeconds: number) {
+	const minutes = Math.floor(initialSeconds / 60);
+	const seconds = Math.floor(initialSeconds % 60);
+	return { minutes, seconds };
+}

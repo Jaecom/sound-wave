@@ -5,6 +5,7 @@ import WebtoonHomeList from "./WebtoonHomeList";
 import Contants from "expo-constants";
 import SearchIcon from "@/assets/icons/search-sm.svg";
 import { Link } from "expo-router";
+import { router } from "expo-router";
 
 const HomePage = () => {
 	const statusBarHeight = Contants.statusBarHeight;
@@ -16,17 +17,32 @@ const HomePage = () => {
 			<View style={[styles.top, { height: statusBarHeight }]} />
 			<SafeAreaView style={styles.content}>
 				<View style={styles.topControl}>
-					<Link style={styles.search} href="/search">
+					<TouchableOpacity
+						style={styles.search}
+						accessibilityLabel="검색"
+						accessibilityRole="button"
+						accessible
+						onPress={() => router.push("/search")}
+					>
 						<SearchIcon />
-					</Link>
+					</TouchableOpacity>
 				</View>
-				<Image style={styles.banner} source={require("@assets/webtoons/home_thumbnails/banner.jpeg")} />
+				<Image
+					style={styles.banner}
+					source={require("@assets/webtoons/home_thumbnails/banner.jpeg")}
+					accessible
+					accessibilityLabel="화제의 신작 웹툰"
+					accessibilityRole="button"
+				/>
 				<View style={styles.tabContainer}>
 					{["신작", "매일+", "월", "화", "수", "목", "금", "토", "일", "완결"].map((tab) => (
 						<TouchableOpacity
 							key={tab}
 							onPress={() => setSelectedTab(tab)}
 							style={[styles.tab, selectedTab === tab && styles.selectedTab]}
+							accessibilityRole="button"
+							accessibilityLabel={["신작", "매일+", "완결"].includes(tab) ? `${tab} 탭` : `${tab}요 연재`}
+							aria-selected={selectedTab === tab}
 						>
 							<Text style={[styles.tabText, selectedTab === tab && styles.selectedTabText]}>{tab}</Text>
 						</TouchableOpacity>
@@ -79,6 +95,10 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: 169,
 		objectFit: "contain",
+	},
+	image: {
+		width: "100%",
+		height: "100%",
 	},
 	topControl: {
 		position: "absolute",

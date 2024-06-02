@@ -30,6 +30,7 @@ export default function TabLayout() {
 					tabBarStyle: { display: pagesToHideTabBar.includes(page) ? "none" : "flex" },
 					tabBarIcon: ({ focused }) => (focused ? <CalendarFillIcon /> : <CalendarIcon />),
 					headerShown: false,
+					tabBarAccessibilityLabel: "네비게이션 웹툰",
 				}}
 			/>
 			<Tabs.Screen
@@ -37,6 +38,7 @@ export default function TabLayout() {
 				options={{
 					title: "추천완결",
 					tabBarIcon: () => <RecommendedIcon />,
+					tabBarAccessibilityLabel: "네비게이션 추천완결",
 				}}
 			/>
 			<Tabs.Screen
@@ -44,6 +46,7 @@ export default function TabLayout() {
 				options={{
 					title: "베스트 도전",
 					tabBarIcon: () => <SavedIcon />,
+					tabBarAccessibilityLabel: "네비게이션 베스트도전",
 				}}
 			/>
 			<Tabs.Screen
@@ -51,6 +54,7 @@ export default function TabLayout() {
 				options={{
 					title: "MY",
 					tabBarIcon: () => <SmileIcon />,
+					tabBarAccessibilityLabel: "네비게이션 MY",
 				}}
 			/>
 			<Tabs.Screen
@@ -58,6 +62,7 @@ export default function TabLayout() {
 				options={{
 					title: "더보기",
 					tabBarIcon: () => <BlockIcon />,
+					tabBarAccessibilityLabel: "네비게이션 더보기",
 				}}
 			/>
 			<Tabs.Screen

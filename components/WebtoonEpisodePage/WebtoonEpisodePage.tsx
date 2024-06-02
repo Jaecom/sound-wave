@@ -47,10 +47,14 @@ const WebtoonEpisodePage = ({ webtoon, episodeId }: Props) => {
 					headerShown: true,
 					headerRight: () => (
 						<View style={headerStyles.container}>
-							<TouchableOpacity onPress={onPlayHandler}>
+							<TouchableOpacity
+								onPress={onPlayHandler}
+								accessibilityLabel={`웹툰 낭독 ${isPlaying ? "끄기" : "켜기"}`}
+								accessibilityRole="button"
+							>
 								{initialStart ? <PlayFilledLogo /> : <PlayLogo />}
 							</TouchableOpacity>
-							<TouchableOpacity>
+							<TouchableOpacity accessibilityLabel="더보기" accessibilityRole="button">
 								<MoreLogo />
 							</TouchableOpacity>
 						</View>
@@ -66,7 +70,7 @@ const WebtoonEpisodePage = ({ webtoon, episodeId }: Props) => {
 				}}
 			/>
 			<View style={contentStyles.content}>
-				<View style={{ backgroundColor: "black" }}></View>
+				<View style={contentStyles.image} accessible accessibilityLabel="웹툰 이미지" />
 				{initialStart && (
 					<DetailedControl
 						onPlay={togglePlay}
@@ -100,6 +104,9 @@ const headerStyles = StyleSheet.create({
 const contentStyles = StyleSheet.create({
 	content: {
 		position: "relative",
+		height: "100%",
+	},
+	image: {
 		height: "100%",
 	},
 });

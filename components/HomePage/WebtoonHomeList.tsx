@@ -19,7 +19,12 @@ const WebtoonHomeList = () => {
 			data={webtoonList}
 			renderItem={({ item }) => (
 				<View style={styles.card}>
-					<TouchableOpacity onPress={() => handlePress(item)}>
+					<TouchableOpacity
+						onPress={() => handlePress(item)}
+						accessible
+						accessibilityLabel={`작품명: ${item.title} 작가명: ${item.author} 별정: ${item.rating}`}
+						accessibilityRole="button"
+					>
 						<WebtoonHomeCard item={item} />
 					</TouchableOpacity>
 				</View>

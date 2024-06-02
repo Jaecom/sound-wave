@@ -30,6 +30,7 @@ const WebtoonDetailTop = ({ webtoonId, onSortChange, sortBy, webtoonData }: Prop
 			{
 				options: ["날짜순", "최신순", "취소"],
 				cancelButtonIndex: 2,
+				title: "회차정렬",
 			},
 			(buttonIndex) => {
 				switch (buttonIndex) {
@@ -50,14 +51,16 @@ const WebtoonDetailTop = ({ webtoonId, onSortChange, sortBy, webtoonData }: Prop
 				<Image style={styles.cover} source={cover} />
 			</View>
 			<View style={styles.container}>
-				<Text style={styles.title}>{title}</Text>
-				<Text style={styles.author}>
-					{author} · <Text style={styles.date}>{day}</Text>
+				<Text style={styles.title} accessibilityLabel={`작품명 ${title}`}>
+					{title}
+				</Text>
+				<Text style={styles.author} accessibilityLabel={`작가 ${author} ${day}요 웹툰`}>
+					{author} · <Text style={styles.date}>{day}요일</Text>
 				</Text>
 
 				<Text style={styles.description}>{summary}</Text>
-				<Text style={styles.age}>{age}</Text>
-				<View style={styles.tagContainer}>
+				<Text style={styles.age}>연령 {age}세 이용가</Text>
+				<View style={styles.tagContainer} accessible accessibilityLabel={`관련 키워드 ${tags.map((tag) => tag)}`}>
 					{tags.map((tag, index) => (
 						<View key={index} style={styles.tag}>
 							<Text style={styles.tagText} key={index}>
@@ -67,16 +70,26 @@ const WebtoonDetailTop = ({ webtoonId, onSortChange, sortBy, webtoonData }: Prop
 					))}
 				</View>
 				<View style={styles.controlContainer}>
-					<TouchableOpacity style={styles.control} onPress={onViewFirstEpisode}>
+					<TouchableOpacity style={styles.control} onPress={onViewFirstEpisode} accessibilityRole="button">
 						<Text style={styles.controlText}>첫화보기</Text>
 					</TouchableOpacity>
-					<TouchableOpacity style={styles.control} onPress={onContinueEpisode}>
+					<TouchableOpacity
+						style={styles.control}
+						onPress={onContinueEpisode}
+						accessibilityRole="button"
+						accessibilityLabel="회차 이어서 보기"
+					>
 						<Text style={styles.controlText}>이어서 보기</Text>
 					</TouchableOpacity>
-					<View style={styles.control}>
+					<TouchableOpacity style={styles.control} accessibilityRole="button" accessibilityLabel="관심 작품 추가하기">
 						<Text style={styles.controlText}>관심등록</Text>
-					</View>
-					<TouchableOpacity style={styles.control} onPress={onSortPressed}>
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={styles.control}
+						onPress={onSortPressed}
+						accessibilityRole="button"
+						accessibilityLabel={`${sortBy} 선택됨 회차 정렬 필터`}
+					>
 						<Text style={styles.controlText}>{sortBy}</Text>
 					</TouchableOpacity>
 				</View>

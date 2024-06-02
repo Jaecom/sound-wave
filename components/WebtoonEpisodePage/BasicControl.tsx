@@ -4,6 +4,7 @@ import CommentLogo from "@/assets/icons/comments.svg";
 import HeartLogo from "@/assets/icons/heart.svg";
 import NextEpisodeLogo from "@/assets/icons/next_episode.svg";
 import PreviousEpisodeLogo from "@/assets/icons/previous_episode.svg";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type Props = {
 	comments: number;
@@ -14,24 +15,34 @@ const BasicControl = ({ comments, likes }: Props) => {
 	return (
 		<View style={basicControl.firstControl}>
 			<View style={basicControl.group}>
-				<View style={basicControl.textIconGroup}>
+				<TouchableOpacity
+					style={basicControl.textIconGroup}
+					accessibilityLabel={`좋아요 ${likes}개`}
+					accessibilityHint="활성화 하려면 두번 탭하세요"
+					accessibilityRole="button"
+				>
 					<HeartLogo />
 					<Text style={basicControl.controlText}>{likes}</Text>
-				</View>
-				<View style={basicControl.textIconGroup}>
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={basicControl.textIconGroup}
+					accessibilityLabel={`댓글 ${comments}개`}
+					accessibilityHint="활성화 하려면 두번 탭하세요"
+					accessibilityRole="button"
+				>
 					<CommentLogo />
 					<Text style={basicControl.controlText}>{comments}</Text>
-				</View>
+				</TouchableOpacity>
 			</View>
 			<View style={basicControl.group}>
-				<View style={basicControl.textIconGroup}>
+				<TouchableOpacity style={basicControl.textIconGroup} accessibilityLabel="이전회차" accessibilityRole="button">
 					<PreviousEpisodeLogo />
 					<Text style={basicControl.controlText}>이전회차</Text>
-				</View>
-				<View style={basicControl.textIconGroup}>
+				</TouchableOpacity>
+				<TouchableOpacity style={basicControl.textIconGroup} accessibilityLabel="다음회차" accessibilityRole="button">
 					<Text style={basicControl.controlText}>다음회차</Text>
 					<NextEpisodeLogo />
-				</View>
+				</TouchableOpacity>
 			</View>
 		</View>
 	);

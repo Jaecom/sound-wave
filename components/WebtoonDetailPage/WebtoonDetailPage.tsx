@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import WebtoonDetailTop from "./WebtoonDetailTop";
 import { WebtoonDetail, WebtoonEpisode, towerOfGodData } from "@/data/tower_of_god";
 import EpisodeItem from "./EpisodeItem";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type Props = {
 	webtoonData: WebtoonDetail;
@@ -14,7 +15,7 @@ const WebtoonDetailPage = ({ webtoonData }: Props) => {
 	const [sortBy, setSortBy] = useState("날짜순");
 	const [sortedEpisodes, setSortedEpisodes] = useState(episodes);
 
-	const onEpisodePressHandler = (episode: WebtoonEpisode) => {
+	const onEpisodePress = (episode: WebtoonEpisode) => {
 		if (![0].includes(episode.id)) return;
 		router.push(`/webtoons/${id}/${episode.id}`);
 	};
@@ -41,7 +42,15 @@ const WebtoonDetailPage = ({ webtoonData }: Props) => {
 					/>
 				}
 				data={sortedEpisodes}
-				renderItem={({ item }) => <EpisodeItem key={item.id} episode={item} onEpisodePress={onEpisodePressHandler} />}
+				renderItem={({ item }) => (
+					<TouchableOpacity
+						onPress={() => onEpisodePress(item)}
+						accessibilityLabel={`회차명 ${item.title} 별점 ${item.rating} 업로드 날짜 ${item.date}`}
+						accessibilityRole="button"
+					>
+						<EpisodeItem key={item.id} episode={item} />
+					</TouchableOpacity>
+				)}
 				keyExtractor={(item, index) => index.toString()}
 				contentContainerStyle={styles.container}
 			/>
