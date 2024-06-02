@@ -5,7 +5,6 @@ import WindForwardLogo from "@/assets/icons/wind_forward.svg";
 import WindBackwardLogo from "@/assets/icons/wind_backward.svg";
 import PauseLogo from "@/assets/icons/pause.svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import PlayFilledLogo from "@/assets/icons/play_filled.svg";
 import { ActionSheetIOS } from "react-native";
 import { useProgress } from "react-native-track-player";
 import Slider from "@react-native-community/slider";

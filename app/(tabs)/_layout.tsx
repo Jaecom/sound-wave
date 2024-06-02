@@ -26,6 +26,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="webtoons"
 				options={{
+					title: "웹툰",
 					tabBarStyle: { display: pagesToHideTabBar.includes(page) ? "none" : "flex" },
 					tabBarIcon: ({ focused }) => (focused ? <CalendarFillIcon /> : <CalendarIcon />),
 					headerShown: false,

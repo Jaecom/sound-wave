@@ -1,8 +1,6 @@
 import { View, Text } from "react-native";
 import React, { useState } from "react";
-import MusicPlayer from "@/components/MusicPlayer";
 import { Stack } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
 import PlayLogo from "@/assets/icons/play.svg";
 import PlayFilledLogo from "@/assets/icons/play_filled.svg";
 import MoreLogo from "@/assets/icons/more.svg";
@@ -30,6 +28,7 @@ const WebtoonEpisodePage = ({ webtoon, episodeId }: Props) => {
 			togglePlay();
 		} else {
 			setInitialStart(false);
+			isPlaying ? togglePlay() : null;
 		}
 	};
 
